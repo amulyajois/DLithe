@@ -4,12 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wanderlust Travels</title>
+    <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            color: #333;
+        }
+        header {
+            background: #0288d1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background: url('hero.jpg') no-repeat center center/cover;
+            padding: 50px;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+        .destination {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .destination div {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin-bottom: 20px;
+        }
+        .packages {
+            background: #81d4fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+            width: 60%;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .packages img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .packages p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .moving-text {
+            position: absolute;
+            top: -30px;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: moveText 10s linear infinite;
+        }
+        @keyframes moveText {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: block;
+            width: 50%;
+            margin: 20px auto;
+            text-align: left;
+        }
+        input, select, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #0277bd;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #01579b;
+        }
+        footer {
+            background: #0288d1;
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Header Section -->
     <header>
-        <h1><center>Nomadic Nest</h1>
+        <h1>Nomadic Nest</h1>
         <nav>
             <a href="#">Home</a> | 
             <a href="#">About Us</a> | 
@@ -17,77 +139,71 @@
             <a href="#">Book Now</a> | 
             <a href="#">Contact</a>
         </nav>
-        <hr>
     </header>
 
-    <!-- Hero Section -->
-    <div>
+    <div class="hero">
         <h2>Explore the World with Us!</h2>
         <p>Unforgettable journeys to the most beautiful destinations.</p>
-        <img src="hero.jpg" alt="Travel Adventure" width="400" height="350">
     </div>
 
-    <!-- Featured Destinations -->
-    <div>
+    <div class="container">
         <h2>Top Destinations</h2>
-
-        <div>
-            <h3>Bali, Indonesia</h3>
-            <p>🏝️ Tropical beaches and stunning landscapes.</p>
+        <div class="destination">
+            <div>
+                <h3>Bali, Indonesia</h3>
+                <p>🏝️ Tropical beaches and stunning landscapes.</p>
+                <p>Package: $1,500 | Includes hotel & local transport.</p>
+            </div>
+            <div>
+                <h3>Rome, Italy</h3>
+                <p>🏛️ Explore the ancient wonders of Rome.</p>
+                <p>Package: $2,000 | Includes guided tours & meals.</p>
+            </div>
+            <div>
+                <h3>New York, USA</h3>
+                <p>🌆 Experience the vibrant city life of NYC.</p>
+                <p>Package: $1,800 | Includes hotel & sightseeing passes.</p>
+            </div>
         </div>
 
-        <div>
-            <h3>Rome, Italy</h3>
-            <p>🏛️ Explore the ancient wonders of Rome.</p>
+        <div class="packages">
+            <div class="moving-text"><strong>Unforgettable Memories Await!</strong></div>
+            <h2>Our Travel Packages</h2>
+            <p>Choose from a variety of travel experiences:</p>
+            <ul>
+                <li>🌄 Adventure Trips - Thrilling expeditions & hikes</li>
+                <li>🏖️ Beach Holidays - Relax at world-famous beaches</li>
+                <li>🏙️ City Tours - Explore iconic cities with local guides</li>
+                <li>🌿 Nature & Wildlife - Discover exotic wildlife & landscapes</li>
+            </ul>
+           
         </div>
 
-        <div>
-            <h3>New York, USA</h3>
-            <p>🌆 Experience the vibrant city life of NYC.</p>
-        </div>
-    </div>
-
-    <!-- Travel Packages -->
-    <div>
-        <h2>Our Travel Packages</h2>
-        <ul>
-            <li>🌄 Adventure Trips</li>
-            <li>🏖️ Beach Holidays</li>
-            <li>🏙️ City Tours</li>
-            <li>🌿 Nature & Wildlife</li>
-        </ul>
-    </div>
-
-    <!-- Booking Form -->
-    <div>
-        <h2>Book Your Trip</h2>
         <form>
+            <h2>Book Your Trip</h2>
             <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name"><br><br>
+            <input type="text" id="name" placeholder="Enter your name" required>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email"><br><br>
+            <input type="email" id="email" placeholder="Enter your email" required>
 
             <label for="destination">Choose Destination:</label>
-            <select id="destination" name="destination">
-                <option value="bali">Bali</option>
-                <option value="rome">Rome</option>
-                <option value="nyc">New York</option>
-            </select><br><br>
+            <select id="destination">
+                <option value="bali">Bali, Indonesia</option>
+                <option value="rome">Rome, Italy</option>
+                <option value="nyc">New York, USA</option>
+            </select>
 
-            <label for="date">Travel Date:</label>
-            <input type="date" id="date" name="date"><br><br>
+            <label for="message">Additional Requests:</label>
+            <textarea id="message" rows="4" placeholder="Write your requests here..."></textarea>
 
-            <button type="submit">Book Now</button>
+            <button type="submit">Submit</button>
         </form>
     </div>
 
-    <!-- Footer Section -->
     <footer>
-        <hr>
         <p>Email: info@nomadicnest.com | Phone: +123 456 7890</p>
         <p>&copy; 2025 Nomadic Nest. All Rights Reserved.</p>
     </footer>
-
 </body>
 </html>
