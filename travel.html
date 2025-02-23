@@ -92,32 +92,21 @@
                 transform: translateX(100%);
             }
         }
-        form {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .book-button {
             display: block;
-            width: 50%;
-            margin: 20px auto;
-            text-align: left;
-        }
-        input, select, textarea {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
             background: #0277bd;
             color: white;
-            padding: 10px;
+            padding: 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            width: 200px;
+            margin: 20px auto;
         }
-        button:hover {
+        .book-button:hover {
             background: #01579b;
         }
         footer {
@@ -176,29 +165,9 @@
                 <li>🏙️ City Tours - Explore iconic cities with local guides</li>
                 <li>🌿 Nature & Wildlife - Discover exotic wildlife & landscapes</li>
             </ul>
-           
         </div>
 
-        <form>
-            <h2>Book Your Trip</h2>
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
-
-            <label for="destination">Choose Destination:</label>
-            <select id="destination">
-                <option value="bali">Bali, Indonesia</option>
-                <option value="rome">Rome, Italy</option>
-                <option value="nyc">New York, USA</option>
-            </select>
-
-            <label for="message">Additional Requests:</label>
-            <textarea id="message" rows="4" placeholder="Write your requests here..."></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
+        <a href="book.html" class="book-button">Book Now</a>
     </div>
 
     <footer>
