@@ -104,10 +104,13 @@
             padding: 20px;
             margin-top: 20px;
         }
+        .controls {
+            text-align: center;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
-
     <header>
         <h1>NewsSphere</h1>
         <nav>
@@ -121,25 +124,27 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search news...">
+        <button onclick="sortNews()">Sort A-Z</button>
+    </div>
+
+    <div class="container" id="news-container">
         <div class="news-item">
             <h2>Breaking News: Technology Advancements</h2>
             <img src="image1.jpg" alt="Technology News">
-            <p>New AI models are revolutionizing industries worldwide, making automation more efficient and reducing human effort. Experts believe this shift will significantly impact multiple sectors in the coming decade.</p>
+            <p>New AI models are revolutionizing industries worldwide...</p>
         </div>
-
         <div class="news-item">
             <h2>Sports: Football Championship</h2>
             <img src="image2.jpg" alt="Football News">
-            <p>The national football championship concluded with an intense final match, where the underdog team claimed victory in a dramatic penalty shootout. Fans across the country celebrated the unexpected triumph.</p>
+            <p>The national football championship concluded with an intense final match...</p>
         </div>
-
         <div class="news-item">
             <h2>Health: New Research on Nutrition</h2>
             <img src="image3.jpg" alt="Health News">
-            <p>Scientists have discovered the long-term benefits of a balanced diet for mental health and longevity. Studies indicate that consuming fresh, unprocessed foods leads to improved cognitive functions.</p>
+            <p>Scientists have discovered the long-term benefits of a balanced diet...</p>
         </div>
-
         <div class="news-item">
             <h2>Entertainment: Movie Release</h2>
             <img src="image4.jpg" alt="Movie News">
@@ -158,13 +163,13 @@
             <p>NASA has unveiled plans for its next Mars mission, aiming to explore new regions of the red planet. The mission is expected to provide groundbreaking insights into Martian geology.</p>
         </div>
     </div>
-    
+
     <div class="more-news">
         <h3>🌍 More News:</h3>
-        <ul>
-            <li>🚀 SpaceX successfully launches a new satellite, advancing space exploration.</li>
-            <li>📉 Stock markets show signs of recovery as investors regain confidence.</li>
-            <li>🏆 Scientists win the Nobel Prize in Medicine for groundbreaking discoveries.</li>
+        <ul id="breaking-news">
+            <li>🚀 SpaceX successfully launches a new satellite...</li>
+            <li>📉 Stock markets show signs of recovery...</li>
+            <li>🏆 Scientists win the Nobel Prize in Medicine...</li>
         </ul>
     </div>
     <a href="enquire.html" class="enquire-button">Read More / Enquire</a>
@@ -173,5 +178,30 @@
         <p>&copy; 2025 NewsSphere. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        function sortNews() {
+            let newsContainer = document.getElementById("news-container");
+            let newsItems = Array.from(newsContainer.getElementsByClassName("news-item"));
+            
+            newsItems.sort((a, b) => {
+                let titleA = a.getElementsByTagName("h2")[0].innerText.toLowerCase();
+                let titleB = b.getElementsByTagName("h2")[0].innerText.toLowerCase();
+                return titleA.localeCompare(titleB);
+            });
+            
+            newsContainer.innerHTML = "";
+            newsItems.forEach(item => newsContainer.appendChild(item));
+        }
+
+        document.getElementById("search").addEventListener("input", function() {
+            let searchValue = this.value.toLowerCase();
+            let newsItems = document.querySelectorAll(".news-item");
+            
+            newsItems.forEach(item => {
+                let title = item.getElementsByTagName("h2")[0].innerText.toLowerCase();
+                item.style.display = title.includes(searchValue) ? "block" : "none";
+            });
+        });
+    </script>
 </body>
 </html>

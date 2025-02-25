@@ -35,7 +35,7 @@
             display: block;
             margin-top: 10px;
         }
-        input, select, textarea {
+        input, select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -71,29 +71,40 @@
 
     <div class="container">
         <h2>Fill Your Details</h2>
-        <form action="travel.html" method="get">
+        <form id="bookingForm">
             <label for="name">Full Name:</label>
             <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
             <label for="destination">Choose Destination:</label>
-            <select id="destination" name="destination">
+            <select id="destination" name="destination" onchange="estimateCost()">
                 <option value="bali">Bali, Indonesia</option>
                 <option value="rome">Rome, Italy</option>
                 <option value="nyc">New York, USA</option>
             </select>
 
+            <p id="costEstimate"></p>
+
+            <label for="travelers">Number of Travelers:</label>
+            <input type="number" id="travelers" name="travelers" min="1" value="1" oninput="estimateCost()">
+
+            <label for="tripDuration">Trip Duration:</label>
+            <select id="tripDuration" name="tripDuration" onchange="estimateCost()">
+                <option value="3">3 Days</option>
+                <option value="5">5 Days</option>
+                <option value="7">7 Days</option>
+            </select>
+
             <label for="date">Travel Date:</label>
-            <input type="date" id="date" name="date" required>
+            <input type="date" id="date" name="date" required oninput="calculateDays()">
+            <p id="daysLeft"></p>
 
-            <label for="package">Package Range ($500 - $5000):</label>
-            <input type="range" id="package" name="package" min="500" max="5000" step="100" oninput="this.nextElementSibling.value = this.value">
-            <output>2750</output>
-
-            <label for="requests">Additional Requests:</label>
-            <textarea id="requests" name="requests" rows="4" placeholder="Any special requirements?"></textarea>
+            <p id="totalCost"></p>
 
             <button type="submit">Submit Booking</button>
         </form>
@@ -103,5 +114,94 @@
         <p>Email: info@nomadicnest.com | Phone: +123 456 7890</p>
         <p>&copy; 2025 Nomadic Nest. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Set minimum travel date to today
+        document.getElementById("date").min = new Date().toISOString().split("T")[0];
+
+        function calculateDays() {
+            let travelDate = new Date(document.getElementById("date").value);
+            let today = new Date();
+            let diff = Math.ceil((travelDate - today) / (1000 * 60 * 60 * 24));
+
+            if (diff > 0) {
+                document.getElementById("daysLeft").innerText = `Your trip is in ${diff} days.`;
+            } else {
+                document.getElementById("daysLeft").innerText = "Please select a future date.";
+            }
+        }
+
+        function estimateCost() {
+            let destination = document.getElementById("destination").value;
+            let travelers = parseInt(document.getElementById("travelers").value) || 1;
+            let tripDuration = parseInt(document.getElementById("tripDuration").value);
+            let baseCost;
+
+            switch (destination) {
+                case "bali":
+                    baseCost = 500;
+                    break;
+                case "rome":
+                    baseCost = 800;
+                    break;
+                case "nyc":
+                    baseCost = 1000;
+                    break;
+                default:
+                    baseCost = 0;
+            }
+
+            let totalCost = baseCost * travelers * (tripDuration / 3);
+
+            // Apply group discount for 3+ travelers
+            if (travelers >= 3) {
+                totalCost *= 0.9; // 10% discount
+                document.getElementById("totalCost").innerText = `Total Cost: $${totalCost.toFixed(2)} (10% group discount applied)`;
+            } else {
+                document.getElementById("totalCost").innerText = `Total Cost: $${totalCost.toFixed(2)}`;
+            }
+
+            document.getElementById("costEstimate").innerText = `Estimated Cost Per Traveler: $${baseCost * (tripDuration / 3)}`;
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^\d{10}$/.test(phone);
+        }
+
+        document.getElementById("bookingForm").addEventListener("submit", function(event) {
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let date = document.getElementById("date").value;
+            let travelers = document.getElementById("travelers").value;
+
+            if (!name || !email || !phone || !date || !travelers) {
+                alert("Please fill in all required fields.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!validatePhone(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                event.preventDefault();
+                return;
+            }
+
+            let confirmBooking = confirm(`Confirm your booking?\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nNumber of Travelers: ${travelers}`);
+            if (!confirmBooking) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
